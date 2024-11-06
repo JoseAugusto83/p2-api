@@ -1,5 +1,7 @@
 package application.model;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,4 +23,16 @@ public class Tarefa {
     private long id_tarefa;
     private String titulo;
     private String descricao;
+    private LocalDate dataCriacao;
+    private LocalDate dataInicio;
+    private LocalDate dataConclusao;
+
+    public Tarefa(application.record.TarefaDTO tarefa){
+        this.id_tarefa = tarefa.id_tarefa();
+        this.titulo = tarefa.titulo();
+        this.descricao = tarefa.descricao();
+        this.dataCriacao = tarefa.dataCriacao();
+        this.dataInicio = tarefa.dataInicio();
+        this.dataConclusao = tarefa.dataConclusao();
+    }
 }
