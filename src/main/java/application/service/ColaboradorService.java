@@ -1,5 +1,7 @@
 package application.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import application.model.Tarefa;
 import application.record.ColaboradorDTO;
 import application.record.ColaboradorListDTO;
 import application.repository.ColaboradorRepository;
+import application.repository.TarefaRepository;
 
 @Service
 public class ColaboradorService {
@@ -19,11 +22,27 @@ public class ColaboradorService {
     @Autowired
     private ColaboradorRepository colaboradorRepo;
 
-    public Iterable<ColaboradorListDTO> findAll(){
-        return colaboradorRepo.findAll().stream().map(ColaboradorListDTO::new).toList();
+    @Autowired
+    private TarefaRepository tarefaRepo;
+
+    public Iterable<ColaboradorDTO> findAll(){
+        return colaboradorRepo.findAll().stream().map(ColaboradorDTO::new).toList();
     }
 
     public ColaboradorDTO insert(ColaboradorDTO colaborador){
+        List<Long> lista = new ArrayList<>();
+        for (int i = 0; i < colaborador.tarefas().size() ; i++){
+            if(!tarefaRepo.existsById(colaborador.tarefas().get(i).getId_tarefa())) {
+                lista.add(colaborador.tarefas().get(i).getId_tarefa());
+            }
+        }
+
+        if(lista.size() != 0) {
+            throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "Tarefas de id " + lista + " não encontradas"
+            );
+        }
+
         return new ColaboradorDTO(colaboradorRepo.save(new Colaborador(colaborador)));
     }
 

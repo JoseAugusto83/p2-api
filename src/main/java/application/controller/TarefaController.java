@@ -10,35 +10,33 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import application.record.ColaboradorDTO;
-import application.record.ColaboradorListDTO;
-import application.service.ColaboradorService;
+import application.record.TarefaDTO;
+import application.service.TarefaService;
 
 @RestController
-@RequestMapping("/colaboradores")
-public class ColaboradorController {
-    
+@RequestMapping("/tarefas")
+public class TarefaController {
+
     @Autowired
-    private ColaboradorService colaboradorService;
+    private TarefaService tarefaRepo;
 
     @GetMapping
-    public Iterable<ColaboradorDTO> list(){
-        return colaboradorService.findAll();
+    public Iterable<TarefaDTO> list(){
+        return tarefaRepo.findAll();
     }
 
     @PostMapping
-    public ColaboradorDTO insert(@RequestBody ColaboradorDTO colaborador){
-        return colaboradorService.insert(colaborador);
+    public TarefaDTO insert(@RequestBody TarefaDTO tarefa){
+        return tarefaRepo.insert(tarefa);
     }
 
     @PutMapping("/{id}")
-    public ColaboradorDTO update(@PathVariable long id, @RequestBody ColaboradorDTO colaborador){
-        return colaboradorService.update(id, colaborador);
+    public TarefaDTO update(@PathVariable long id, @RequestBody TarefaDTO tarefa){
+        return tarefaRepo.update(id, tarefa);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable long id){
-        colaboradorService.deleteById(id);
+        tarefaRepo.deleteById(id);
     }
-
 }

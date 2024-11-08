@@ -27,8 +27,6 @@ public class TarefaService {
         TarefaDTO resposta = new TarefaDTO(retorno);
 
         return resposta;
-
-        //return new TarefaDTO(tarefaRepo.save(new tarefa(tarefa)));
     }
 
     public TarefaDTO update(long id, TarefaDTO tarefa) {

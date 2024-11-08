@@ -7,22 +7,23 @@ POST {{url}}/colaboradores
 Content-Type: application/json
 
 {
-    "nome": "José",
+    "nome": "Lara",
     "tarefas" : [
-        
+        {"id_tarefa": 3},
+        {"id_tarefa": 4}
     ]
 }
 
 ###
-PUT {{url}}/questoes/4
+PUT {{url}}/colaboradores/1
 Content-Type: application/json
 
 {
-    "enunciado": "Questão com Categoria Novo Tese - Alterada",
-    "categoria" : {
-        "id": 4
-    }
+    "nome": "Claudio",
+    "tarefas" : [
+        {"id_tarefa": 2}
+    ]
 }
 
 ###
-DELETE {{url}}/questoes/1
+DELETE {{url}}/colaboradores/5

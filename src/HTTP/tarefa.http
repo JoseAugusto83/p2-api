@@ -1,0 +1,29 @@
+@url = https://sturdy-pancake-xggwqgx4qq9h64j6-8080.app.github.dev
+
+GET {{url}}/tarefas
+
+###
+POST {{url}}/tarefas
+Content-Type: application/json
+
+{
+    "titulo": "Limpar casa",
+    "descricao": "sala e cozinha",
+    "dataCriacao": "2024-11-21",
+    "dataInicio": "2024-11-21",
+    "dataConclusao": "2024-11-25"
+}
+
+###
+PUT {{url}}/questoes/4
+Content-Type: application/json
+
+{
+    "enunciado": "Questão com Categoria Novo Tese - Alterada",
+    "categoria" : {
+        "id": 4
+    }
+}
+
+###
+DELETE {{url}}/questoes/1

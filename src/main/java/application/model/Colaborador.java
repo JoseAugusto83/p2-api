@@ -1,5 +1,6 @@
 package application.model;
 
+import java.util.List;
 import java.util.Set;
 
 import application.record.ColaboradorDTO;
@@ -31,7 +32,7 @@ public class Colaborador {
     @JoinTable(name = "colaboradores_tarefas",
         joinColumns = @JoinColumn(name="id_colaborador"),
         inverseJoinColumns = @JoinColumn(name="id_tarefa"))
-    public Set<Tarefa> tarefas;
+    public List<Tarefa> tarefas;
 
 
     public Colaborador(ColaboradorDTO colaborador){
