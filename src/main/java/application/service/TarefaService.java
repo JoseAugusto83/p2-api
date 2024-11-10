@@ -1,5 +1,7 @@
 package application.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,28 @@ public class TarefaService {
     }
 
     public TarefaDTO insert(TarefaDTO tarefa) {
+        if(tarefa.titulo().isBlank()) {
+            throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "Título não pode ser nulo"  
+            );
+        }
+        if(tarefa.dataCriacao() == null) {
+            throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "Data de criação não pode ser nulo"  
+            );
+        }
+        List<Long> lista = new ArrayList<>();
+        for (int i = 0; i < tarefa.colaboradores().size() ; i++){
+            if(!tarefaRepo.existsById(tarefa.colaboradores().get(i).getId_colaborador())) {
+                lista.add(tarefa.colaboradores().get(i).getId_colaborador());
+            }
+        }
+
+        if(lista.size() != 0) {
+            throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "Colaboradores de id " + lista + " não encontrados"
+            );
+        }
         Tarefa novo = new Tarefa(tarefa);
         Tarefa retorno = tarefaRepo.save(novo);
         TarefaDTO resposta = new TarefaDTO(retorno);
@@ -30,12 +54,35 @@ public class TarefaService {
     }
 
     public TarefaDTO update(long id, TarefaDTO tarefa) {
+        if(tarefa.titulo().isBlank()) {
+            throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "Título não pode ser nulo"  
+            );
+        }
+        if(tarefa.dataCriacao() == null) {
+            throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "Data de criação não pode ser nulo"  
+            );
+        }
         Optional<Tarefa> resultado = tarefaRepo.findById(id);
         if(resultado.isEmpty()) {
             throw new ResponseStatusException(
                 HttpStatus.NOT_FOUND, "Tarefa não encontrada"  
             );
         }
+        List<Long> lista = new ArrayList<>();
+        for (int i = 0; i < tarefa.colaboradores().size() ; i++){
+            if(!tarefaRepo.existsById(tarefa.colaboradores().get(i).getId_colaborador())) {
+                lista.add(tarefa.colaboradores().get(i).getId_colaborador());
+            }
+        }
+
+        if(lista.size() != 0) {
+            throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "Colaboradores de id " + lista + " não encontrados"
+            );
+        }
+        
         resultado.get().setTitulo(tarefa.titulo());
         resultado.get().setDescricao(tarefa.descricao());
         resultado.get().setDataInicio(tarefa.dataInicio());

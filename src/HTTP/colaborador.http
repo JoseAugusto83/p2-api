@@ -1,29 +1,27 @@
 @url = https://sturdy-pancake-xggwqgx4qq9h64j6-8080.app.github.dev
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBUEkgVGFyZWZhcyIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzMxMjg1MTIzfQ.D-ZU5kc3Fm1UeLty6ccNmC7_2FMV6vzH2lU5V73GmUg
 
 GET {{url}}/colaboradores
+Authorization: Bearer {{token}}
 
 ###
 POST {{url}}/colaboradores
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-    "nome": "Lara",
-    "tarefas" : [
-        {"id_tarefa": 3},
-        {"id_tarefa": 4}
-    ]
+    "nome": "asdasdas"
 }
 
 ###
 PUT {{url}}/colaboradores/1
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-    "nome": "Claudio",
-    "tarefas" : [
-        {"id_tarefa": 2}
-    ]
+    "nome": ""
 }
 
 ###
-DELETE {{url}}/colaboradores/5
+DELETE {{url}}/colaboradores/1
+Authorization: Bearer {{token}}

@@ -1,29 +1,44 @@
-@url = https://sturdy-pancake-xggwqgx4qq9h64j6-8080.app.github.dev
+#@url = https://sturdy-pancake-xggwqgx4qq9h64j6-8080.app.github.dev
+
+@url = http://localhost:8080
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBUEkgUXVpenplcyIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzMxMjg0NDE0fQ.zZKYDgb-Ihr1rF-S92I4V-LWehJB092FmAzOGempNDY
 
 GET {{url}}/tarefas
+Authorization: Bearer {{token}}
 
 ###
 POST {{url}}/tarefas
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
+
 {
-    "titulo": "Limpar casa",
+    "titulo": "Limpar Quarto",
     "descricao": "sala e cozinha",
     "dataCriacao": "2024-11-21",
     "dataInicio": "2024-11-21",
-    "dataConclusao": "2024-11-25"
+    "dataConclusao": "2024-11-25",
+    "colaboradores": [
+        {"id_colaborador": 3}
+    ]
 }
 
 ###
-PUT {{url}}/questoes/4
+PUT {{url}}/tarefas/2
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-    "enunciado": "Questão com Categoria Novo Tese - Alterada",
-    "categoria" : {
-        "id": 4
-    }
+    "titulo": "asdasd",
+    "descricao": "sala e cozinha",
+    "dataCriacao": "",
+    "dataInicio": "2024-11-21",
+    "dataConclusao": "2024-11-25",
+    "colaboradores": [
+        {"id_colaborador": 3}
+    ]
 }
 
 ###
-DELETE {{url}}/questoes/1
+DELETE {{url}}/tarefas/10
+Authorization: Bearer {{token}}
